@@ -1,14 +1,12 @@
-3---
-title: "Práctica 1: Importación de datos"
-author: "Alvaro Egea Hernandez
+---
+title: "Pon un título a tu documento"
+author: "Pon aquí tu nombre y apellidos"
 date: "`r Sys.Date()`"
 output:
-  bookdown::pdf_document2:
+  pdf_document:
     toc: true
     toc_depth: 3
     number_sections: true
-    figure_caption: "Figura" # Referencias en castellano
-    table_caption: "Tabla"
   html_document:
     echo: true
     number_sections: true
@@ -18,10 +16,12 @@ output:
     echo: true
     number_sections: true
     toc: true
-  pdf_document:
+  bookdown::pdf_document2:
     toc: true
     toc_depth: 3
     number_sections: true
+    figure_caption: "Figura" # Referencias en castellano
+    table_caption: "Tabla"
   bookdown::html_document2:
     echo: true
     number_sections: true
@@ -50,7 +50,6 @@ language:
     remark: 'Nota: '
     solution: 'Solución. '
 ---
-
 # 2 Ejemplo: fichero DFP1_11122015 124700.csv
 
 ## 2.1 Importación del fichero
@@ -112,7 +111,7 @@ summary(leer)
  Me aporta un resumen de cada columna
 
 
-#3 Fichero Transactions from a Bakery
+# 3 Fichero Transactions from a Bakery
 
 ```{r}
 filename <- "data/bakery_sales_revised.csv"
@@ -160,7 +159,7 @@ tail(PsychBike)
 summary(PsychBike)
 ```
 
-#5 Fichero data iris.zip
+# 5 Fichero data iris.zip
 
 ## 5.1 Descompimir el fichero
 ```{r}
@@ -220,8 +219,59 @@ save(datos_json, file = "data/results/FileCodificado.RData")
 str(datos_json)
 head(datos_json)
 tail(datos_json)
-summary(datos_jason)
+summary(datos_json)
 ```
 
 
-#8 Fichero JSON iris_json.json
+# 8 Fichero JSON iris_json.json
+
+##8.1 Importar el fichero iris_json.json
+```{r}
+ocho <- "data/iris_json.json"
+
+iris_read <- read_json(ocho, simplifyVector = TRUE)
+
+iris_from <- fromJSON(ocho)
+
+str(iris_read)
+str(iris_from)
+
+save(iris_from, file = "data/results/iris_json.RData")
+```
+
+La única diferencia que encuentro esque read_json es necesario usar simplifyVector y en fromJSON viene ya predeterminado
+
+##8.2 Inspeccion de datos
+
+```{r}
+str(iris_from)
+head(iris_from)
+tail(iris_from)
+summary(iris_from)
+```
+
+##8.3 exportar datos en formato JSON
+
+1.
+```{r}
+load("data/results/iris.RData")
+
+write_json(iris,"data/iris_json_v2.json")
+```
+2.
+```{r}
+library(jsonlite)
+library(readr)
+
+data(iris)
+
+json1 <- toJSON(iris)
+
+write_file(json1, "data/iris_json_v2.json")
+
+json2 <- toJSON(iris, pretty = TRUE)
+
+write_file(json2, "data/iris_json_pretty.json")
+```
+
+El parámetro pretty te ordena el jason en bloques, si  no ponemos el pretty y abres el archivo entonces saldría todo en una linea
