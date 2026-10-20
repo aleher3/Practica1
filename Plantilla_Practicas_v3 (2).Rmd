@@ -1,0 +1,114 @@
+3---
+title: "Práctica 1: Importación de datos"
+author: "Alvaro Egea Hernandez
+date: "`r Sys.Date()`"
+output:
+  bookdown::pdf_document2:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    figure_caption: "Figura" # Referencias en castellano
+    table_caption: "Tabla"
+  html_document:
+    echo: true
+    number_sections: true
+    theme: lumen
+    toc: true
+  html_notebook:
+    echo: true
+    number_sections: true
+    toc: true
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+  bookdown::html_document2:
+    echo: true
+    number_sections: true
+    theme: spacelab
+    toc: true
+    figure_caption: "Figura"
+    table_caption: "Tabla"
+always_allow_html: true
+params:
+  lang: ES
+lang: "`r switch(params$lang, ES = 'es-ES', EN = 'en-US')`"
+subtitle: "Introducción a la Ciencia de Datos. Máster en Ciencia de Datos- UV"
+language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabla '
+    eq: 'Ecuación '
+    thm: 'Teorema '
+    lem: 'Lema '
+    def: 'Definición '
+    cor: 'Corolario '
+    prp: 'Proposición '
+    exm: 'Ejemplo '
+    exr: 'Ejercicio '
+    proof: 'Demostración. '
+    remark: 'Nota: '
+    solution: 'Solución. '
+---
+
+# 2 Ejemplo: fichero DFP1_11122015 124700.csv
+
+## 2.1 Importación del fichero
+
+###1.
+La diferencia entre importar con readr y base es que base te permite saber que tipo de variable usamos y ademas en base te indica directamente que el separador en un tabulador. Visualmente no encuentro ninguna diferencia más.
+
+###2. 
+```{r}
+
+dataframe <- "data/DFP1_11122015 124700.csv"
+
+leer <- read.csv(dataframe, sep = "\t", stringsAsFactors = FALSE)
+
+
+```
+
+###3.
+
+```{r}
+#miramoslos nombres y tipos de columnas
+names(leer)
+str(leer)
+
+#Ahora que sí usamos lo que nos pide sabiendo los nombres
+
+leer$FECHA <- as.POSIXlt(leer$FECHA, format = "%d/%m/%Y")
+
+
+library(hms)
+leer$Hora <- as.hms(leer$HORA)
+```
+###4.
+```{r}
+save(leer, file = "data/results/Dospuntouno.RData")
+```
+
+## 2.2 Inspeccion de los datos
+```{r}
+str(leer)
+```
+
+Me aporta la estructura del dataframe, numero de columnas, tipos...
+```{r}
+head(leer)
+```
+Me aporta las primmeras 6 filas
+
+```{r}
+tail(leer)
+```
+
+Me aporta las ultimas 6 filas
+
+```{r}
+summary(leer)
+
+```
+ Me aporta un resumen de cada columna
+
+
