@@ -143,7 +143,6 @@ summary(bakery)
 # 4 Fichero SPSS PyschBike.sav
 ```{r}
 
-install.packages("haven")
 library(haven)
 
 filename <- "data/PsychBike.sav"
@@ -152,3 +151,53 @@ PsychBike <- read_sav(filename)
 
 save(PsychBike, file = "data/results/PsychBike.RData")
 ```
+## Inspección de los datos
+```{r}
+dim(PsychBike)
+str(PsychBike)
+head(PsychBike)
+tail(PsychBike)
+summary(PsychBike)
+```
+
+#5 Fichero data iris.zip
+
+## 5.1 Descompimir el fichero
+```{r}
+unzip("data/iris.zip", exdir = "data")
+```
+
+#6 Fcihero data iris.data
+
+##6.1 Importación del fichero
+```{r}
+Ejer6 <- read.table("data/iris.data")
+
+```
+2.
+```{r}
+
+names(iris) <- c(
+  "Sepal.Length",
+  "Sepal.Width",
+  "Petal.Length",
+  "Petal.Width",
+  "Species"
+)
+
+```
+
+3.
+```{r}
+
+save(iris, file = "data/results/iris.RData")
+```
+
+4.
+```{r}
+str(iris)
+head(iris)
+tail(iris)
+summary(iris)
+```
+
