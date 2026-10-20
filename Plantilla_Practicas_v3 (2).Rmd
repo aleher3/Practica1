@@ -112,3 +112,43 @@ summary(leer)
  Me aporta un resumen de cada columna
 
 
+#3 Fichero Transactions from a Bakery
+
+```{r}
+filename <- "data/bakery_sales_revised.csv"
+
+bakery <- read.csv(filename)
+
+str(bakery)
+```
+```{r}
+library(readr)
+bakery_sales_revised <- read_csv("data/bakery_sales_revised.csv")
+View(bakery_sales_revised)
+```
+
+
+```{r}
+save(bakery, file = "data/results/Tres.RData")
+```
+
+```{r}
+dim(bakery)
+str(bakery)
+head(bakery)
+tail(bakery)
+summary(bakery)
+```
+
+# 4 Fichero SPSS PyschBike.sav
+```{r}
+
+install.packages("haven")
+library(haven)
+
+filename <- "data/PsychBike.sav"
+
+PsychBike <- read_sav(filename)
+
+save(PsychBike, file = "data/results/PsychBike.RData")
+```
