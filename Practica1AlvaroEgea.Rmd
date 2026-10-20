@@ -200,4 +200,28 @@ head(iris)
 tail(iris)
 summary(iris)
 ```
+# 7 Fichero JSON FileCodificado.json
 
+## 7.2 Importación del fichero
+```{r}
+library(jsonlite)
+
+jason <- "data/FileCodificado.json"
+
+
+datos_json <- read_json(jason, simplifyVector = TRUE)
+
+str(datos_json)
+save(datos_json, file = "data/results/FileCodificado.RData")
+```
+
+## 7.3 Inspeccion de los datos
+```{r}
+str(datos_json)
+head(datos_json)
+tail(datos_json)
+summary(datos_jason)
+```
+
+
+#8 Fichero JSON iris_json.json
